@@ -8,12 +8,15 @@
 
         public string? Author { get; set; }
 
+        public DateTimeOffset? DateCreated { get; set; }
 
-        public RSSArticle(string content, string title, string author)
+
+        public RSSArticle(string content, string title, string author, DateTimeOffset dateCreated)
         {
             Content = content;
             Title = title;  
             Author = author;
+            DateCreated = dateCreated;
         }
     }
 }

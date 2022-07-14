@@ -51,11 +51,11 @@ namespace RSSAggro.Controllers
                     item.PublishDate = item.LastUpdatedTime;
                 }
             }
-            rssItems.Sort((x, y) => x.PublishDate.CompareTo(x.PublishDate));
+            rssItems.Sort((x, y) => y.PublishDate.CompareTo(x.PublishDate));
 
             foreach (SyndicationItem item in rssItems)
             {
-                var article = new RSSArticle((item?.Content as TextSyndicationContent)?.Text ?? item?.Summary?.Text ?? "no content", item?.Title.Text ?? "No Title", item?.Id ?? "No slug");
+                var article = new RSSArticle((item?.Content as TextSyndicationContent)?.Text ?? item?.Summary?.Text ?? "no content", item?.Title.Text ?? "No Title", item?.Id ?? "No slug", item.PublishDate);
                 ArticleList.Add(article);
             }
 
