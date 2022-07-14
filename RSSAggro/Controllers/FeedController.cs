@@ -9,8 +9,6 @@ namespace RSSAggro.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["Message"] = "Hello";
-            ViewData["NumTimes"] = 5;
 
             var rssFeeds = new List<Uri>
             {
@@ -30,7 +28,6 @@ namespace RSSAggro.Controllers
             {
                 var result = client.GetStreamAsync(rssFeed).Result;
 
-                // todo: implement the rest
                 using (var xmlReader = XmlReader.Create(result))
                 {
                     SyndicationFeed feed = SyndicationFeed.Load(xmlReader);
@@ -41,9 +38,7 @@ namespace RSSAggro.Controllers
                         foreach (SyndicationItem item in feed.Items)
                         {
                             rssItems.Add(item);
-                      
                         }
-                        // todo: loop over feed.Items?
                     }  
                 }
             }
@@ -51,7 +46,6 @@ namespace RSSAggro.Controllers
             //fix invalid years
             foreach (SyndicationItem item in rssItems)
             {
-                //invalid year
                 if (item.PublishDate.Year == 1)
                 {
                     item.PublishDate = item.LastUpdatedTime;
@@ -61,14 +55,9 @@ namespace RSSAggro.Controllers
 
             foreach (SyndicationItem item in rssItems)
             {
-                //{1/1/0001 12:00:00 AM +00:00}
-
                 var article = new RSSArticle((item?.Content as TextSyndicationContent)?.Text ?? item?.Summary?.Text ?? "no content", item?.Title.Text ?? "No Title", item?.Id ?? "No slug");
                 ArticleList.Add(article);
-
             }
-
-            // ViewData["FeedItems"] = ArticleList;
 
             return View(ArticleList);
         }
