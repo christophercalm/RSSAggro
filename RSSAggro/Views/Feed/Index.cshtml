@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RSSAggro.Models.RSSArticle>
+
+
+@{
+    ViewData["Title"] = "Welcome";
+
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <ul class="list-group">
+
+            @foreach (var article in Model)
+            {
+                var collapseId = "a" + Guid.NewGuid().ToString();
+
+                <li class="list-group-item">
+                    <h3>@article.Title</h3>
+                    <h6>@article.Author</h6>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@collapseId" aria-expanded="false" aria-controls="@collapseId">
+                        Toggle Article Expansion
+                    </button>
+                    <div class="collapse" id="@collapseId">
+                        <div class="card card-body">
+                            <p>@Html.Raw(article.Content)</p>
+                        </div>
+                    </div>
+                </li>
+
+
+
+
+            }
+        </ul>
+    </div>
+
+</div>
