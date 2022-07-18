@@ -15,7 +15,7 @@ namespace RSSAggro.Controllers
                 new Uri("https://thoughtscollected.tech/feed.xml"),
                 new Uri("http://feeds.hanselman.com/ScottHanselman"),
                 new Uri("https://allenpike.com/feed/"),
-                new Uri("https://weedon.blogspot.com/feeds/posts/default")
+                new Uri("https://stroobants.dev/rss.xml"),
 
             };
             var client = new HttpClient();
